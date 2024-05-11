@@ -42,7 +42,12 @@ public class DealershipFileManager {
     public static void saveDealership(Dealership dealership) {
         BufferedWriter bufWriter = bufWriterAppends(true);
 
-        bufWriter.write(String.format("||||"));
+        try {
+            bufWriter.write(String.format("||||"));
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // Create a method that takes in a parameter for whether to APPEND or NOT
