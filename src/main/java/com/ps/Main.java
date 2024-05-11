@@ -26,42 +26,42 @@ public class Main {
         // Name read from file: getDealership()
             // getDealership() : Dealership
 
-    // Loads and reads from file
-    public static Dealership getDealership() {
-        try {
-            BufferedReader bufReader = new BufferedReader(new FileReader(fileName));
-
-            String line;
-            int lineNum;
-            while ((line = bufReader.readLine()) != null) {
-                String[] splitLine = line.split("\\|");
-
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    // Overwrites inventory.txt file with the current Dealership information and inventory list.
-    public static void saveDealership(Dealership dealership) {
-        BufferedWriter bufWriter = bufWriterAppends(true);
-
-        bufWriter.write(String.format("||||"));
-    }
-
-    // Create a method that takes in a parameter for whether to APPEND or NOT
-    public static BufferedWriter bufWriterAppends(boolean isAppend) {
-        try {
-            return new BufferedWriter(new FileWriter(fileName, isAppend));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    // Save dealership everytime user adds or removes a vehicle. (Optional/Bonus; will touch upon in a later project)
+//    // Loads and reads from file
+//    public static Dealership getDealership() {
+//        try {
+//            BufferedReader bufReader = new BufferedReader(new FileReader(fileName));
+//
+//            String line;
+//            int lineNum;
+//            while ((line = bufReader.readLine()) != null) {
+//                String[] splitLine = line.split("\\|");
+//
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return null;
+//    }
+//
+//    // Overwrites inventory.txt file with the current Dealership information and inventory list.
+//    public static void saveDealership(Dealership dealership) {
+//        BufferedWriter bufWriter = bufWriterAppends(true);
+//
+//        bufWriter.write(String.format("||||"));
+//    }
+//
+//    // Create a method that takes in a parameter for whether to APPEND or NOT
+//    public static BufferedWriter bufWriterAppends(boolean isAppend) {
+//        try {
+//            return new BufferedWriter(new FileWriter(fileName, isAppend));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+//
+//    // Save dealership everytime user adds or removes a vehicle. (Optional/Bonus; will touch upon in a later project)
 
 }

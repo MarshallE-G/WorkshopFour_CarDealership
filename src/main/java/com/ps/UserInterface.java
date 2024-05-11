@@ -7,6 +7,9 @@ Dealership method and then display the vehicles it returns.)
  */
 
 public class UserInterface {
+    // dealership : Dealership
+    Dealership dealership;
+
     // Application features/options:
     // 1 - Find vehicles within a price range
     // 2 - Find vehicles by make/model
@@ -19,12 +22,17 @@ public class UserInterface {
     // 9 - Remove a vehicle
     // 99 - Quit
 
-    // dealership : Dealership
 
-    // Constructor : EMPTY
+    public UserInterface() {
+    }
 
-    // display() : void
-    // init()
+    public static void display() {
+        init();
+    }
+
+    private static void init() {
+
+    }
     // displayVehicles()
     // processAllVehiclesRequest()
 
