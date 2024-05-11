@@ -2,17 +2,18 @@ package com.ps;
 
 public class Main {
     public static void main(String[] args) {
+        // Instance of UserInterface
 
-        // Application features/options:
-            // 1 - Find vehicles within a price range
-            // 2 - Find vehicles by make/model
-            // 3 - Find vehicles by year rnage
-            // 4 - Find vehicles by color
-            // 5 - Find vehicles by mileage range
-            // 6 - Find vehicles by type (car, truck, SUV, van)
-            // 7 - List ALL vehicles
-            // 8 - Add a vehicle
-            // 9 - Remove a vehicle
-            // 99 - Quit
+        // display() method
+
     }
+
+    // Read from file and write to file methods go here or in different/separate class.
+        // Name read from file: getDealership()
+            // getDealership() : Dealership
+        // Name write to file: saveDealership()
+            // saveDealership(dealership)
+            // Create a method that takes in a parameter for whether to APPEND or NOT
+        // Save dealership everytime user adds or removes a vehicle.
+
 }
