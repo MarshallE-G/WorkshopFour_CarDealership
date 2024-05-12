@@ -32,6 +32,9 @@ public class UserInterface {
 
         int homeMenuOption;
         do {
+            processAllVehiclesRequest();
+
+
             System.out.println("1) Find vehicles within a price range");
             System.out.println("2) Find vehicles by make/model");
             System.out.println("3) Find vehicles by year range");
@@ -86,7 +89,7 @@ public class UserInterface {
     // Implemented in all getVehicle-type methods
     private void displayVehicles(ArrayList<Vehicle> dealershipInventory) {
         for (Vehicle vehicle : dealershipInventory) {
-            System.out.println(String.format("%d | %d | %s | %s | %s | %s | %d | %.2f\n",
+            System.out.printf("%d | %d | %s | %s | %s | %s | %d | %.2f\n",
                     vehicle.getVin(),
                     vehicle.getYear(),
                     vehicle.getMake(),
@@ -95,11 +98,10 @@ public class UserInterface {
                     vehicle.getColor(),
                     vehicle.getOdometer(),
                     vehicle.getPrice()
-            ));
+            );
         }
     }
 
-    // processAllVehiclesRequest()
     private void processAllVehiclesRequest() {
         ArrayList<Vehicle> dealershipInventory = dealership.getAllVehicles();
         displayVehicles(dealershipInventory);

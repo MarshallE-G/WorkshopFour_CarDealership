@@ -8,8 +8,10 @@ public class Main {
 
     public static void main(String[] args) {
         // Instance of UserInterface
+        UserInterface userInterface = new UserInterface();
 
         // display() method
+        userInterface.display();
 
     }
 

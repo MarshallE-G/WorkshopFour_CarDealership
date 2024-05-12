@@ -13,12 +13,17 @@ public class Dealership {
     private String address;
     private String phoneNum;
     private ArrayList<Vehicle> inventory; // inventory of all vehicles
+    private ArrayList<Dealership> allDealerships = new ArrayList<>();
 
     public Dealership(String name, String address, String phoneNum) {
         this.name = name;
         this.address = address;
         this.phoneNum = phoneNum;
         this.inventory = new ArrayList<>();
+    }
+
+    public void addDealership(Dealership dealership) {
+        allDealerships.add(dealership);
     }
 
     // getVehiclesByPrice (min, max)
