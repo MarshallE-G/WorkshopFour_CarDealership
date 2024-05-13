@@ -19,6 +19,7 @@ public class DealershipFileManager {
     // Loads and reads from file
     public static Dealership getDealership() {
         Dealership dealership = null; // placeholder value
+        ArrayList<Dealership> allDealerships;
 
         try {
             BufferedReader bufReader = new BufferedReader(new FileReader(fileName));
@@ -35,6 +36,9 @@ public class DealershipFileManager {
                 String phoneNum = splitLine[2];
                 dealership = new Dealership(name, address, phoneNum);
 
+                for () {
+
+                }
                 dealership.addDealership(dealership); // Adds dealership info to an ArrayList of all dealerships
             }
 
