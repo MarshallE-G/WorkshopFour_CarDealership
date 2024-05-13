@@ -5,13 +5,13 @@ Will hold information about a specific vehicle.
  */
 
 public class Vehicle {
-    private int vin;
+    private int vin; // Like an ID#
     private int year;
     private String make;
     private String model;
     private String vehicleType; // (car, truck, etc.)
     private String color;
-    private int odometer;
+    private int odometer; // Instrument used to track mileage
     private float price;
 
     public Vehicle(int vin, int year, String make, String model, String vehicleType, String color, int odometer, float price) {

@@ -16,10 +16,6 @@ import java.util.ArrayList;
 public class DealershipFileManager {
     static String fileName = "inventory.txt";
 
-    // Read from file and write to file methods go here or in different/separate class.
-        // Name read from file: getDealership()
-        // getDealership() : Dealership
-
     // Loads and reads from file
     public static Dealership getDealership() {
         Dealership dealership = null; // placeholder value
@@ -39,7 +35,7 @@ public class DealershipFileManager {
                 String phoneNum = splitLine[2];
                 dealership = new Dealership(name, address, phoneNum);
 
-                dealership.addDealership(dealership);
+                dealership.addDealership(dealership); // Adds dealership info to an ArrayList of all dealerships
             }
 
             while ((line) != null) { // Adds properties that are on the lines AFTER the first line
@@ -68,28 +64,48 @@ public class DealershipFileManager {
 
     // Overwrites inventory.txt file with the current Dealership information and inventory list.
     public static void saveDealership(Dealership dealership) {
-//        BufferedWriter bufWriter = bufWriterAppends(true);
-//        dealership.addDealership(getDealership());
-//        dealership.g
-//
-//        try {
-//            bufWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%.2f",
-//                    dealership.getVin(),
-//                    vehicle.getYear(),
-//                    vehicle.getMake(),
-//                    vehicle.getModel(),
-//                    vehicle.getVehicleType(),
-//                    vehicle.getColor(),
-//                    vehicle.getOdometer(),
-//                    vehicle.getPrice()
-//                    ));
-//
-//        } catch(IOException e) {
-//            e.printStackTrace();
-//        }
+        BufferedWriter bufWriter;
+        ArrayList<Vehicle> inventory = dealership.getAllVehicles();
+        ArrayList<Dealership> allDealerships = dealership.getAllDealerships();
+
+        try {
+            bufWriter = bufWriterAppends(false);
+            bufWriter.write(String.format("%s|%s|%s",
+                    dealership.getName(),
+                    dealership.getAddress(),
+                    dealership.getPhoneNum()
+                    ));
+
+            bufWriter = bufWriterAppends(true);
+            for (Vehicle vehicle : inventory) {
+                bufWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%.2f",
+                        vehicle.getVin(),
+                        vehicle.getYear(),
+                        vehicle.getMake(),
+                        vehicle.getModel(),
+                        vehicle.getVehicleType(),
+                        vehicle.getColor(),
+                        vehicle.getOdometer(),
+                        vehicle.getPrice()
+                ));
+            }
+            bufWriter.close();
+
+
+
+            dealership.addDealership(getDealership()); // Adds (updated) dealership info to an ArrayList of all dealerships
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    // Create a method that takes in a parameter for whether to APPEND or NOT
+    /**
+     * Decides whether a BufferedWriter object is set to append or not, without having to create multiple
+     * BufferedWriter variables/objects.
+     *
+     * @param isAppend
+     * @return BufferedWriter
+     */
     public static BufferedWriter bufWriterAppends(boolean isAppend) {
         try {
             return new BufferedWriter(new FileWriter(fileName, isAppend));
