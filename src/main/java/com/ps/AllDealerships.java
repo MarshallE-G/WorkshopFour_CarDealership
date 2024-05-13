@@ -29,10 +29,16 @@ public class AllDealerships {
      * @param dealership
      */
     public void updateDealership(String oldDealershipName, Dealership dealership) {
-        Dealership oldDealership = dealershipSearcher.get(oldDealershipName);
+        Dealership oldDealership = searchForDealership(oldDealershipName);
         int indexOfDealership = listOfDealerships.indexOf(oldDealership);
 
         listOfDealerships.set(indexOfDealership, dealership);
+    }
+
+    public Dealership searchForDealership(String dealershipName) {
+        Dealership dealership = dealershipSearcher.get(dealershipName);
+
+        return dealership;
     }
 
 

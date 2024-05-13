@@ -11,8 +11,10 @@ import java.util.Scanner;
 
 public class UserInterface {
     // dealership : Dealership
-    Dealership dealership;
-    static Scanner scanner = new Scanner(System.in);
+    private Dealership dealership;
+    private static Scanner scanner = new Scanner(System.in);
+    private static DealershipFileManager fileManager = new DealershipFileManager();
+
 
     public UserInterface() {
     }
@@ -24,11 +26,14 @@ public class UserInterface {
 
     // Creates a dealership object
     private void init() {
-        DealershipFileManager fileManager = new DealershipFileManager();
+//        DealershipFileManager fileManager = new DealershipFileManager();
         this.dealership = fileManager.getDealership();
     }
 
     private void displayHomeMenu() {
+//        AllDealerships allDealerships = new AllDealerships();
+//
+//        System.out.println(allDealerships.getAllDealerships().size());
 
         int homeMenuOption;
         do {
@@ -70,13 +75,12 @@ public class UserInterface {
                     processGetAllVehiclesRequest();
                     break;
                 case 8:
-                    // processAddVehicleRequest()
+                    processAddVehicleRequest();
                     break;
                 case 9:
-                    // processRemoveVehicleRequest()
+                    // processRemoveVehicleRequest();
                     break;
                 case 99:
-                    // Quit/Exit
                     System.out.println("\nExiting...");
                     break;
                 default:
@@ -223,7 +227,47 @@ public class UserInterface {
 
     // processAddVehicleRequest()
     public void processAddVehicleRequest() {
+        int vin; // Like an ID#
+        int year;
+        String make;
+        String model;
+        String vehicleType; // (car, truck, etc.)
+        String color;
+        int odometer; // Instrument used to track mileage
+        float price;
 
+        // Ask for vehicle details
+        System.out.println("What is the vehicle's vin#?");
+        vin = scanner.nextInt();
+
+        System.out.println("What year was the release year of the vehicle?");
+        year = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Who is the maker of this vehicle? (e.g. Honda)");
+        make = scanner.nextLine();
+
+        System.out.println("What is the vehicle model? (e.g. Civic)");
+        model = scanner.nextLine();
+
+        System.out.println("What is the vehicle type? (e.g. SUV)");
+        vehicleType = scanner.nextLine();
+
+        System.out.println("What is the color of the vehicle?");
+        color = scanner.nextLine();
+
+        System.out.println("What is the vehicle's mileage?");
+        odometer = scanner.nextInt();
+
+        System.out.println("What is the price of the vehicle?");
+        price = scanner.nextFloat();
+
+        Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+
+        // Add vehicle to dealership ArrayList
+        dealership.addVehicle(vehicle);
+        // Write to the file and save dealership
+        fileManager.saveDealership(dealership);
     }
 
     // processRemoveVehicleRequest()

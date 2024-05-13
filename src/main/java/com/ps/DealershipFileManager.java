@@ -37,11 +37,12 @@ public class DealershipFileManager {
                 String phoneNum = splitLine[2];
                 dealership = new Dealership(name, address, phoneNum);
 
-                if (doesDealershipExist(dealership)) {
-                    break;
-                } else {
-                    allDealerships.addDealership(dealership); // Adds dealership info to an ArrayList of all dealerships
-                }
+//                if (doesDealershipExist(dealership)) {
+//                    break;
+//                } else {
+//                    allDealerships.addDealership(dealership); // Adds dealership info to an ArrayList of all dealerships
+//                }
+                allDealerships.addDealership(dealership); // Adds dealership info to an ArrayList of all dealerships
             }
 
             while ((line) != null) { // Adds properties that are on the lines AFTER the first line
@@ -65,7 +66,7 @@ public class DealershipFileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return dealership; // = null
+        return null; // = null
     }
 
     // Overwrites inventory.txt file with the current Dealership information and inventory list.
@@ -76,7 +77,7 @@ public class DealershipFileManager {
 
         try {
             bufWriter = bufWriterAppends(false);
-            bufWriter.write(String.format("%s|%s|%s",
+            bufWriter.write(String.format("%s|%s|%s\n",
                     dealership.getName(),
                     dealership.getAddress(),
                     dealership.getPhoneNum()
@@ -84,7 +85,7 @@ public class DealershipFileManager {
 
             bufWriter = bufWriterAppends(true);
             for (Vehicle vehicle : inventory) {
-                bufWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%.2f",
+                bufWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%.2f\n",
                         vehicle.getVin(),
                         vehicle.getYear(),
                         vehicle.getMake(),
@@ -114,7 +115,7 @@ public class DealershipFileManager {
      */
     public static BufferedWriter bufWriterAppends(boolean isAppend) {
         try {
-            return new BufferedWriter(new FileWriter(fileName, isAppend));
+            return new BufferedWriter(new FileWriter("temp.txt", isAppend));
         } catch (IOException e) {
             e.printStackTrace();
         }

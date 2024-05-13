@@ -15,6 +15,7 @@ public class Dealership {
     private String phoneNum;
     private ArrayList<Vehicle> inventory; // inventory of all vehicles
 
+//    public Dealership () {}
     public Dealership(String name, String address, String phoneNum) {
         this.name = name;
         this.address = address;
