@@ -14,8 +14,6 @@ public class Dealership {
     private String address;
     private String phoneNum;
     private ArrayList<Vehicle> inventory; // inventory of all vehicles
-    private ArrayList<Dealership> allDealerships = new ArrayList<>(); // May need to create a new class for this
-    private HashMap<String, Dealership> dealershipSearcher = new HashMap<>(); // May need to create a new class for this
 
     public Dealership(String name, String address, String phoneNum) {
         this.name = name;
@@ -24,23 +22,6 @@ public class Dealership {
         this.inventory = new ArrayList<>();
     }
 
-
-
-    public ArrayList<Dealership> getAllDealerships() { // May need to add to a new class that stores all dealerships
-        return allDealerships;
-    }
-
-    public void addDealership(Dealership dealership) { // May need to add to a new class that stores all dealerships
-        allDealerships.add(dealership);
-        dealershipSearcher.put(dealership.getName(), dealership);
-    }
-
-    public void updateDealership(String dealershipName, Dealership dealership) {
-        Dealership oldDealership = dealershipSearcher.get(dealershipName);
-        int indexOfDealership = allDealerships.indexOf();
-
-        allDealerships.set
-    }
 
     public ArrayList<Vehicle> getVehiclesByPrice(float min, float max) {
         ArrayList<Vehicle> priceRangeFilteredVehicles = new ArrayList<>();

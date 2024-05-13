@@ -15,11 +15,12 @@ import java.util.ArrayList;
 
 public class DealershipFileManager {
     static String fileName = "inventory.txt";
+    static AllDealerships allDealerships = new AllDealerships();
+    static ArrayList<Dealership> listOfDealerships = allDealerships.getAllDealerships();
 
     // Loads and reads from file
     public static Dealership getDealership() {
         Dealership dealership = null; // placeholder value
-        ArrayList<Dealership> allDealerships;
 
         try {
             BufferedReader bufReader = new BufferedReader(new FileReader(fileName));
@@ -36,10 +37,11 @@ public class DealershipFileManager {
                 String phoneNum = splitLine[2];
                 dealership = new Dealership(name, address, phoneNum);
 
-                for () {
-
+                if (doesDealershipExist(dealership)) {
+                    break;
+                } else {
+                    allDealerships.addDealership(dealership); // Adds dealership info to an ArrayList of all dealerships
                 }
-                dealership.addDealership(dealership); // Adds dealership info to an ArrayList of all dealerships
             }
 
             while ((line) != null) { // Adds properties that are on the lines AFTER the first line
@@ -69,8 +71,8 @@ public class DealershipFileManager {
     // Overwrites inventory.txt file with the current Dealership information and inventory list.
     public static void saveDealership(Dealership dealership) {
         BufferedWriter bufWriter;
+        String oldDealershipName = getDealership().getName(); // The current dealership name BEFORE overwriting the file.
         ArrayList<Vehicle> inventory = dealership.getAllVehicles();
-        ArrayList<Dealership> allDealerships = dealership.getAllDealerships();
 
         try {
             bufWriter = bufWriterAppends(false);
@@ -95,9 +97,9 @@ public class DealershipFileManager {
             }
             bufWriter.close();
 
-
-
-            dealership.addDealership(getDealership()); // Adds (updated) dealership info to an ArrayList of all dealerships
+            // Might have to check if either file is empty or if the dealership already exists FIRST or do both.
+            Dealership updatedDealership = getDealership(); // The dealership after the file has been overwritten.
+            allDealerships.updateDealership(oldDealershipName, updatedDealership); // Replaces (updated) dealership info to an ArrayList of all dealerships.
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,6 +121,17 @@ public class DealershipFileManager {
         return null;
     }
 
-    // Save dealership everytime user adds or removes a vehicle. (Optional/Bonus; will touch upon in a later project)
+    public static boolean doesDealershipExist(Dealership dealership) {
+        boolean dealershipDoesExist = false;
+        for (Dealership dealership1 : listOfDealerships) {
+            String currentDealershipName = dealership.getName(); // the dealership that was just created.
+            String dealershipName = dealership1.getName(); // the name of the dealership(s) that's already in the list of all dealerships.
+
+            if (currentDealershipName.equalsIgnoreCase(dealershipName)) {
+                dealershipDoesExist = true;
+            }
+        }
+        return dealershipDoesExist;
+    }
 
 }

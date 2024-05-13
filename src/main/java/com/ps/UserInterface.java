@@ -222,6 +222,10 @@ public class UserInterface {
     }
 
     // processAddVehicleRequest()
+    public void processAddVehicleRequest() {
+
+    }
+
     // processRemoveVehicleRequest()
 
 }
