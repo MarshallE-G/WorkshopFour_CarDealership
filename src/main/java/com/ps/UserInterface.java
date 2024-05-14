@@ -31,9 +31,6 @@ public class UserInterface {
     }
 
     private void displayHomeMenu() {
-//        AllDealerships allDealerships = new AllDealerships();
-//
-//        System.out.println(allDealerships.getAllDealerships().size());
 
         int homeMenuOption;
         do {
@@ -265,9 +262,9 @@ public class UserInterface {
         Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
 
         // Add vehicle to dealership ArrayList
-        dealership.addVehicle(vehicle);
+        this.dealership.addVehicle(vehicle);
         // Write to the file and save dealership
-        fileManager.saveDealership(dealership);
+        fileManager.saveDealership(this.dealership);
     }
 
     // processRemoveVehicleRequest()
