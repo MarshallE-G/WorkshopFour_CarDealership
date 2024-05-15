@@ -68,7 +68,7 @@ public class DealershipFileManager {
     public static void saveDealership(Dealership dealership) {
 
         try {
-            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("temp.txt"));
+            BufferedWriter bufWriter = new BufferedWriter(new FileWriter(fileName));
             //        String oldDealershipName = getDealership().getName(); // The current dealership name BEFORE overwriting the file.
             ArrayList<Vehicle> inventory = dealership.getAllVehicles();
 

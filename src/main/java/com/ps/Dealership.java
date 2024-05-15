@@ -113,10 +113,6 @@ public class Dealership {
     }
 
 
-    /**
-     * Getters and setters
-     *
-     */
     public String getName() {
         return name;
     }

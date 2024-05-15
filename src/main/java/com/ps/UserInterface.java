@@ -75,7 +75,7 @@ public class UserInterface {
                     processAddVehicleRequest();
                     break;
                 case 9:
-                    // processRemoveVehicleRequest();
+                    processRemoveVehicleRequest();
                     break;
                 case 99:
                     System.out.println("\nExiting...");
@@ -106,7 +106,10 @@ public class UserInterface {
 
     private void processGetAllVehiclesRequest() {
         ArrayList<Vehicle> dealershipInventory = dealership.getAllVehicles();
+        String pageTitle = "Displaying all Vehicles";
+
         if (dealershipInventory.size() > 0) {
+            System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(dealershipInventory);
         } else {
             System.out.println("\nThis dealership has no available vehicles.\n\n");
@@ -117,6 +120,7 @@ public class UserInterface {
     public void processGetByPriceRequest() {
         float min;
         float max;
+        String pageTitle = "Displaying all Vehicles By Price";
 
         System.out.println("\nEnter a minimum price:");
         min = scanner.nextFloat();
@@ -126,6 +130,7 @@ public class UserInterface {
 
         ArrayList<Vehicle> priceRangeFilteredVehicles = dealership.getVehiclesByPrice(min, max);
         if (priceRangeFilteredVehicles.size() > 0) {
+            System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(priceRangeFilteredVehicles);
         } else {
             System.out.println("\nThere are no vehicles within this price range.\n\n");
@@ -136,6 +141,7 @@ public class UserInterface {
     public void processGetByMakeModelRequest() {
         String make;
         String model;
+        String pageTitle = "Displaying all Vehicles By Make and Model";
 
         System.out.println("\nEnter vehicle make:");
         scanner.nextLine(); // consumes extra line
@@ -146,6 +152,7 @@ public class UserInterface {
 
         ArrayList<Vehicle> makeModelFilteredVehicles = dealership.getVehiclesByMakeModel(make, model);
         if (makeModelFilteredVehicles.size() > 0) {
+            System.out.printf("\n%48s\n", pageTitle);
             displayVehicles(makeModelFilteredVehicles);
         } else {
             System.out.println("\nEither there are no vehicles with this make and model or your input was spelled incorrectly.\n\n");
@@ -156,6 +163,7 @@ public class UserInterface {
     public void processGetByYearRequest() {
         int min;
         int max;
+        String pageTitle = "Displaying all Vehicles By Year";
 
         System.out.println("\nFrom (year):");
         min = scanner.nextInt();
@@ -165,6 +173,7 @@ public class UserInterface {
 
         ArrayList<Vehicle> yearRangeFilteredVehicles = dealership.getVehiclesByYear(min, max);
         if (yearRangeFilteredVehicles.size() > 0) {
+            System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(yearRangeFilteredVehicles);
         } else {
             System.out.println("\nThere are no vehicles within this year range.\n\n");
@@ -174,6 +183,7 @@ public class UserInterface {
     // processGetByColorRequest()
     public void processGetByColorRequest() {
         String color;
+        String pageTitle = "Displaying all Vehicles By Color";
 
         System.out.println("\nEnter vehicle color:");
         scanner.nextLine(); // consumes extra line
@@ -181,6 +191,7 @@ public class UserInterface {
 
         ArrayList<Vehicle> colorFilteredVehicles = dealership.getVehiclesByColor(color);
         if (colorFilteredVehicles.size() > 0) {
+            System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(colorFilteredVehicles);
         } else {
             System.out.println("\nEither there are no vehicles with this color or your input was spelled incorrectly.\n\n");
@@ -191,6 +202,7 @@ public class UserInterface {
     public void processGetByMileageRequest() {
         int min;
         int max;
+        String pageTitle = "Displaying all Vehicles By Mileage";
 
         System.out.println("\nEnter minimum mileage:");
         min = scanner.nextInt();
@@ -200,6 +212,7 @@ public class UserInterface {
 
         ArrayList<Vehicle> mileageRangeFilteredVehicles = dealership.getVehiclesByMileage(min, max);
         if (mileageRangeFilteredVehicles.size() > 0) {
+            System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(mileageRangeFilteredVehicles);
         } else {
             System.out.println("\nThere are no vehicles within this mileage range.\n\n");
@@ -209,6 +222,7 @@ public class UserInterface {
     // processGetByVehicleTypeRequest()
     public void processGetByVehicleTypeRequest() {
         String inputVehicleType;
+        String pageTitle = "Displaying all Vehicles By Vehicle Type";
 
         System.out.println("\nEnter vehicle type:");
         scanner.nextLine(); // consumes extra line
@@ -216,6 +230,7 @@ public class UserInterface {
 
         ArrayList<Vehicle> vehicleTypeFilteredVehicles = dealership.getVehiclesByType(inputVehicleType);
         if (vehicleTypeFilteredVehicles.size() > 0) {
+            System.out.printf("\n%48s\n", pageTitle);
             displayVehicles(vehicleTypeFilteredVehicles);
         } else {
             System.out.println("\nEither there are no vehicles with this vehicle type or your input was spelled incorrectly.\n\n");
@@ -232,6 +247,8 @@ public class UserInterface {
         String color;
         int odometer; // Instrument used to track mileage
         float price;
+
+        System.out.println("\nYou selected the Add Vehicle option.\n");
 
         // Ask for vehicle details
         System.out.println("What is the vehicle's vin#?");
@@ -263,10 +280,54 @@ public class UserInterface {
 
         // Add vehicle to dealership ArrayList
         this.dealership.addVehicle(vehicle);
+        System.out.printf("\nYou added: %d | %d | %s | %s | %s | %s | %d | %.2f\n\n\n",
+                vehicle.getVin(),
+                vehicle.getYear(),
+                vehicle.getMake(),
+                vehicle.getModel(),
+                vehicle.getVehicleType(),
+                vehicle.getColor(),
+                vehicle.getOdometer(),
+                vehicle.getPrice()
+        );
+
         // Write to the file and save dealership
         fileManager.saveDealership(this.dealership);
     }
 
     // processRemoveVehicleRequest()
+    public void processRemoveVehicleRequest() {
+        int vinInput; // Like an ID#
+
+        System.out.println("\nYou selected the Remove a Vehicle option.\n");
+
+        // Ask for vehicle details
+        System.out.println("What is the vin# of the vehicle you would like to remove?");
+        vinInput = scanner.nextInt();
+
+        System.out.println(); // Extra new line for aesthetics
+
+        int vehicleVin;
+        for (Vehicle vehicle : this.dealership.getAllVehicles()) {
+            vehicleVin = vehicle.getVin(); // vin# of each vehicle in the dealership
+            if (vehicleVin == vinInput) {
+                System.out.printf("You removed: %d | %d | %s | %s | %s | %s | %d | %.2f\n\n\n",
+                        vehicle.getVin(),
+                        vehicle.getYear(),
+                        vehicle.getMake(),
+                        vehicle.getModel(),
+                        vehicle.getVehicleType(),
+                        vehicle.getColor(),
+                        vehicle.getOdometer(),
+                        vehicle.getPrice()
+                );
+                this.dealership.removeVehicle(vehicle);
+                break; // Breaks out of for loop as soon as vehicle is removed.
+            }
+        }
+
+        // Write to the file and save/update dealership
+        fileManager.saveDealership(this.dealership);
+    }
 
 }

@@ -14,7 +14,7 @@ public class Main {
         userInterface.display();
 
         // My extra feature (To be created)
-        // Add abstract class for Colors
+        // Add enum (a type of class) for Colors
         // Create an ArrayList of all available colors in the dealership
         // If user wants to add a vehicle with a certain color, they must select from the available colors.
         // Each color will have a matching ANSI code.
