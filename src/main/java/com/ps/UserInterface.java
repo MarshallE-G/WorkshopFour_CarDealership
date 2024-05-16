@@ -17,8 +17,7 @@ public class UserInterface {
     private static DealershipFileManager fileManager = new DealershipFileManager();
 
 
-    public UserInterface() {
-    }
+    public UserInterface() {} // Constructor
 
     public void display() {
         init();
@@ -31,7 +30,7 @@ public class UserInterface {
         this.dealership = fileManager.getDealership();
     }
 
-    private void displayHomeMenu() {
+    public void displayHomeMenu() {
 
         int homeMenuOption;
         do {
@@ -105,7 +104,7 @@ public class UserInterface {
         System.out.println("\n");
     }
 
-    private void processGetAllVehiclesRequest() {
+    public void processGetAllVehiclesRequest() {
         List<Vehicle> dealershipInventory = dealership.getAllVehicles();
         String pageTitle = "Displaying all Vehicles";
 

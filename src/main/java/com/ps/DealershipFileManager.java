@@ -26,9 +26,9 @@ public class DealershipFileManager {
         try {
             BufferedReader bufReader = new BufferedReader(new FileReader(fileName));
 
-            String line;
-            line = bufReader.readLine(); // Reads FIRST line of file
-            String[] dealershipInfo = line.split("\\|");
+            String firstLine;
+            firstLine = bufReader.readLine(); // Reads FIRST line of file
+            String[] dealershipInfo = firstLine.split("\\|");
 
             // Set properties of Dealership
             String name = dealershipInfo[0];
@@ -42,16 +42,17 @@ public class DealershipFileManager {
 //                    allDealerships.addDealership(dealership); // Adds dealership info to an ArrayList of all dealerships
 //                }
 
-            while ((line = bufReader.readLine()) != null) { // Adds properties that are on the lines AFTER the first line
-                String[] splitLine = line.split("\\|");
-                int vin = Integer.parseInt(splitLine[0]);
-                int year = Integer.parseInt(splitLine[1]);
-                String make = splitLine[2];
-                String model = splitLine[3];
-                String vehicleType = splitLine[4];
-                String color = splitLine[5];
-                int odometer = Integer.parseInt(splitLine[6]);
-                float price = Float.parseFloat(splitLine[7]);
+            String input;
+            while ((input = bufReader.readLine()) != null) { // Adds properties that are on the lines AFTER the first line
+                String[] splitInput = input.split("\\|");
+                int vin = Integer.parseInt(splitInput[0]);
+                int year = Integer.parseInt(splitInput[1]);
+                String make = splitInput[2];
+                String model = splitInput[3];
+                String vehicleType = splitInput[4];
+                String color = splitInput[5];
+                int odometer = Integer.parseInt(splitInput[6]);
+                float price = Float.parseFloat(splitInput[7]);
                 Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
 
                 dealership.addVehicle(vehicle);
@@ -61,8 +62,9 @@ public class DealershipFileManager {
             return dealership;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        return dealership; // = null
+//        return dealership; // = null <---- Because the return statement is now in the catch-block, you don't have to put this here.
     }
 
     // Overwrites inventory.txt file with the current Dealership information and inventory list.
