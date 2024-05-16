@@ -7,6 +7,7 @@ Dealership method and then display the vehicles it returns.)
  */
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -87,7 +88,7 @@ public class UserInterface {
     }
 
     // Implemented in all getVehicle-type methods
-    private void displayVehicles(ArrayList<Vehicle> dealershipInventory) {
+    private void displayVehicles(List<Vehicle> dealershipInventory) {
         System.out.println("\n");
         for (Vehicle vehicle : dealershipInventory) {
             System.out.printf("%d | %d | %s | %s | %s | %s | %d | %.2f\n",
@@ -105,7 +106,7 @@ public class UserInterface {
     }
 
     private void processGetAllVehiclesRequest() {
-        ArrayList<Vehicle> dealershipInventory = dealership.getAllVehicles();
+        List<Vehicle> dealershipInventory = dealership.getAllVehicles();
         String pageTitle = "Displaying all Vehicles";
 
         if (dealershipInventory.size() > 0) {
@@ -128,7 +129,7 @@ public class UserInterface {
         System.out.println("\nEnter a maximum price:");
         max = scanner.nextFloat();
 
-        ArrayList<Vehicle> priceRangeFilteredVehicles = dealership.getVehiclesByPrice(min, max);
+        List<Vehicle> priceRangeFilteredVehicles = dealership.getVehiclesByPrice(min, max);
         if (priceRangeFilteredVehicles.size() > 0) {
             System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(priceRangeFilteredVehicles);
@@ -150,7 +151,7 @@ public class UserInterface {
         System.out.println("\nEnter vehicle model:");
         model = scanner.nextLine();
 
-        ArrayList<Vehicle> makeModelFilteredVehicles = dealership.getVehiclesByMakeModel(make, model);
+        List<Vehicle> makeModelFilteredVehicles = dealership.getVehiclesByMakeModel(make, model);
         if (makeModelFilteredVehicles.size() > 0) {
             System.out.printf("\n%48s\n", pageTitle);
             displayVehicles(makeModelFilteredVehicles);
@@ -171,7 +172,7 @@ public class UserInterface {
         System.out.println("\nTo (year):");
         max = scanner.nextInt();
 
-        ArrayList<Vehicle> yearRangeFilteredVehicles = dealership.getVehiclesByYear(min, max);
+        List<Vehicle> yearRangeFilteredVehicles = dealership.getVehiclesByYear(min, max);
         if (yearRangeFilteredVehicles.size() > 0) {
             System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(yearRangeFilteredVehicles);
@@ -189,7 +190,7 @@ public class UserInterface {
         scanner.nextLine(); // consumes extra line
         color = scanner.nextLine();
 
-        ArrayList<Vehicle> colorFilteredVehicles = dealership.getVehiclesByColor(color);
+        List<Vehicle> colorFilteredVehicles = dealership.getVehiclesByColor(color);
         if (colorFilteredVehicles.size() > 0) {
             System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(colorFilteredVehicles);
@@ -210,7 +211,7 @@ public class UserInterface {
         System.out.println("\nEnter maximum mileage:");
         max = scanner.nextInt();
 
-        ArrayList<Vehicle> mileageRangeFilteredVehicles = dealership.getVehiclesByMileage(min, max);
+        List<Vehicle> mileageRangeFilteredVehicles = dealership.getVehiclesByMileage(min, max);
         if (mileageRangeFilteredVehicles.size() > 0) {
             System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(mileageRangeFilteredVehicles);
@@ -228,7 +229,7 @@ public class UserInterface {
         scanner.nextLine(); // consumes extra line
         inputVehicleType = scanner.nextLine();
 
-        ArrayList<Vehicle> vehicleTypeFilteredVehicles = dealership.getVehiclesByType(inputVehicleType);
+        List<Vehicle> vehicleTypeFilteredVehicles = dealership.getVehiclesByType(inputVehicleType);
         if (vehicleTypeFilteredVehicles.size() > 0) {
             System.out.printf("\n%48s\n", pageTitle);
             displayVehicles(vehicleTypeFilteredVehicles);

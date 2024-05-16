@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DealershipFileManager {
     static String fileName = "inventory.txt";
@@ -70,7 +71,7 @@ public class DealershipFileManager {
         try {
             BufferedWriter bufWriter = new BufferedWriter(new FileWriter(fileName));
             //        String oldDealershipName = getDealership().getName(); // The current dealership name BEFORE overwriting the file.
-            ArrayList<Vehicle> inventory = dealership.getAllVehicles();
+            List<Vehicle> inventory = dealership.getAllVehicles();
 
             bufWriter.write(String.format("%s|%s|%s\n",
                     dealership.getName(),

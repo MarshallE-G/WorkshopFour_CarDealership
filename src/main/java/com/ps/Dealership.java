@@ -8,6 +8,7 @@ add/remove vehicles.
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Dealership {
     private String name;
@@ -24,7 +25,8 @@ public class Dealership {
     }
 
 
-    public ArrayList<Vehicle> getVehiclesByPrice(float min, float max) {
+    // Changed all these method's return types to a "List" from an "ArrayList"
+    public List<Vehicle> getVehiclesByPrice(float min, float max) {
         ArrayList<Vehicle> priceRangeFilteredVehicles = new ArrayList<>();
 
         for (Vehicle vehicle : inventory) {
@@ -37,7 +39,7 @@ public class Dealership {
         return priceRangeFilteredVehicles;
     }
 
-    public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
         ArrayList<Vehicle> makeModelFilteredVehicles = new ArrayList<>();
 
         for (Vehicle vehicle : inventory) {
@@ -51,7 +53,7 @@ public class Dealership {
         return makeModelFilteredVehicles;
     }
 
-    public ArrayList<Vehicle> getVehiclesByYear(int min, int max) {
+    public List<Vehicle> getVehiclesByYear(int min, int max) {
         ArrayList<Vehicle> yearRangeFilteredVehicles = new ArrayList<>();
 
         for (Vehicle vehicle : inventory) {
@@ -63,7 +65,7 @@ public class Dealership {
         return yearRangeFilteredVehicles;
     }
 
-    public ArrayList<Vehicle> getVehiclesByColor(String color) {
+    public List<Vehicle> getVehiclesByColor(String color) {
         ArrayList<Vehicle> colorFilteredVehicles = new ArrayList<>();
 
         for (Vehicle vehicle : inventory) {
@@ -76,7 +78,7 @@ public class Dealership {
         return colorFilteredVehicles;
     }
 
-    public ArrayList<Vehicle> getVehiclesByMileage(int min, int max) {
+    public List<Vehicle> getVehiclesByMileage(int min, int max) {
         ArrayList<Vehicle> mileageRangeFilteredVehicles = new ArrayList<>();
 
         for (Vehicle vehicle : inventory) {
@@ -88,7 +90,7 @@ public class Dealership {
         return mileageRangeFilteredVehicles;
     }
 
-    public ArrayList<Vehicle> getVehiclesByType(String inputVehicleType) {
+    public List<Vehicle> getVehiclesByType(String inputVehicleType) {
         ArrayList<Vehicle> vehicleTypeFilteredVehicles = new ArrayList<>();
 
         for (Vehicle vehicle : inventory) {
@@ -101,7 +103,7 @@ public class Dealership {
         return vehicleTypeFilteredVehicles;
     }
 
-    public ArrayList<Vehicle> getAllVehicles() {
+    public List<Vehicle> getAllVehicles() {
         return inventory;
     }
 
@@ -140,7 +142,6 @@ public class Dealership {
                 "name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", phoneNum='" + phoneNum + '\'' +
-                ", inventory=" + inventory +
                 '}';
     }
 }
