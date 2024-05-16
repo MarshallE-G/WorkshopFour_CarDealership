@@ -69,11 +69,10 @@ public class DealershipFileManager {
 
     // Overwrites inventory.txt file with the current Dealership information and inventory list.
     public static void saveDealership(Dealership dealership) {
-
         try {
             BufferedWriter bufWriter = new BufferedWriter(new FileWriter(fileName));
-            //        String oldDealershipName = getDealership().getName(); // The current dealership name BEFORE overwriting the file.
             List<Vehicle> inventory = dealership.getAllVehicles();
+//            String oldDealershipName = getDealership().getName(); // The current dealership name BEFORE overwriting the file.
 
             bufWriter.write(String.format("%s|%s|%s\n",
                     dealership.getName(),

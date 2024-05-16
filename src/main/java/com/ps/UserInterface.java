@@ -14,7 +14,7 @@ public class UserInterface {
     // dealership : Dealership
     private Dealership dealership;
     private static Scanner scanner = new Scanner(System.in);
-    private static DealershipFileManager fileManager = new DealershipFileManager();
+//    private static DealershipFileManager fileManager = new DealershipFileManager(); <---- Not really necessary
 
 
     public UserInterface() {} // Constructor
@@ -26,8 +26,7 @@ public class UserInterface {
 
     // Creates a dealership object
     private void init() {
-//        DealershipFileManager fileManager = new DealershipFileManager();
-        this.dealership = fileManager.getDealership();
+        this.dealership = DealershipFileManager.getDealership();
     }
 
     public void displayHomeMenu() {
@@ -84,13 +83,14 @@ public class UserInterface {
                     System.out.println("\nERROR: Must select options 1 - 9 or 99!\n\n");
             }
         } while (homeMenuOption != 99);
+        scanner.close();
     }
 
     // Implemented in all getVehicle-type methods
     private void displayVehicles(List<Vehicle> dealershipInventory) {
         System.out.println("\n");
         for (Vehicle vehicle : dealershipInventory) {
-            System.out.printf("%d | %d | %s | %s | %s | %s | %d | %.2f\n",
+            System.out.printf("%d | %d | %s | %s | %s | %s | %d | $%.2f\n",
                     vehicle.getVin(),
                     vehicle.getYear(),
                     vehicle.getMake(),
@@ -108,7 +108,7 @@ public class UserInterface {
         List<Vehicle> dealershipInventory = dealership.getAllVehicles();
         String pageTitle = "Displaying all Vehicles";
 
-        if (dealershipInventory.size() > 0) {
+        if (!dealershipInventory.isEmpty()) {
             System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(dealershipInventory);
         } else {
@@ -116,7 +116,6 @@ public class UserInterface {
         }
     }
 
-    // processGetByPriceRequest()
     public void processGetByPriceRequest() {
         float min;
         float max;
@@ -129,7 +128,7 @@ public class UserInterface {
         max = scanner.nextFloat();
 
         List<Vehicle> priceRangeFilteredVehicles = dealership.getVehiclesByPrice(min, max);
-        if (priceRangeFilteredVehicles.size() > 0) {
+        if (!priceRangeFilteredVehicles.isEmpty()) {
             System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(priceRangeFilteredVehicles);
         } else {
@@ -137,21 +136,22 @@ public class UserInterface {
         }
     }
 
-    // processGetByMakeModelRequest()
     public void processGetByMakeModelRequest() {
         String make;
         String model;
         String pageTitle = "Displaying all Vehicles By Make and Model";
 
+        // Consumes extra carriage
+        scanner.nextLine();
+
         System.out.println("\nEnter vehicle make:");
-        scanner.nextLine(); // consumes extra line
         make = scanner.nextLine();
 
         System.out.println("\nEnter vehicle model:");
         model = scanner.nextLine();
 
         List<Vehicle> makeModelFilteredVehicles = dealership.getVehiclesByMakeModel(make, model);
-        if (makeModelFilteredVehicles.size() > 0) {
+        if (!makeModelFilteredVehicles.isEmpty()) {
             System.out.printf("\n%48s\n", pageTitle);
             displayVehicles(makeModelFilteredVehicles);
         } else {
@@ -159,7 +159,6 @@ public class UserInterface {
         }
     }
 
-    // processGetByYearRequest()
     public void processGetByYearRequest() {
         int min;
         int max;
@@ -172,7 +171,7 @@ public class UserInterface {
         max = scanner.nextInt();
 
         List<Vehicle> yearRangeFilteredVehicles = dealership.getVehiclesByYear(min, max);
-        if (yearRangeFilteredVehicles.size() > 0) {
+        if (!yearRangeFilteredVehicles.isEmpty()) {
             System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(yearRangeFilteredVehicles);
         } else {
@@ -180,17 +179,18 @@ public class UserInterface {
         }
     }
 
-    // processGetByColorRequest()
     public void processGetByColorRequest() {
         String color;
         String pageTitle = "Displaying all Vehicles By Color";
 
+        // Consumes extra carriage
+        scanner.nextLine();
+
         System.out.println("\nEnter vehicle color:");
-        scanner.nextLine(); // consumes extra line
         color = scanner.nextLine();
 
         List<Vehicle> colorFilteredVehicles = dealership.getVehiclesByColor(color);
-        if (colorFilteredVehicles.size() > 0) {
+        if (!colorFilteredVehicles.isEmpty()) {
             System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(colorFilteredVehicles);
         } else {
@@ -198,7 +198,6 @@ public class UserInterface {
         }
     }
 
-    // processGetByMileageRequest()
     public void processGetByMileageRequest() {
         int min;
         int max;
@@ -211,7 +210,7 @@ public class UserInterface {
         max = scanner.nextInt();
 
         List<Vehicle> mileageRangeFilteredVehicles = dealership.getVehiclesByMileage(min, max);
-        if (mileageRangeFilteredVehicles.size() > 0) {
+        if (!mileageRangeFilteredVehicles.isEmpty()) {
             System.out.printf("\n%45s\n", pageTitle);
             displayVehicles(mileageRangeFilteredVehicles);
         } else {
@@ -219,17 +218,18 @@ public class UserInterface {
         }
     }
 
-    // processGetByVehicleTypeRequest()
     public void processGetByVehicleTypeRequest() {
         String inputVehicleType;
         String pageTitle = "Displaying all Vehicles By Vehicle Type";
 
+        // Consumes extra carriage
+        scanner.nextLine();
+
         System.out.println("\nEnter vehicle type:");
-        scanner.nextLine(); // consumes extra line
         inputVehicleType = scanner.nextLine();
 
         List<Vehicle> vehicleTypeFilteredVehicles = dealership.getVehiclesByType(inputVehicleType);
-        if (vehicleTypeFilteredVehicles.size() > 0) {
+        if (!vehicleTypeFilteredVehicles.isEmpty()) {
             System.out.printf("\n%48s\n", pageTitle);
             displayVehicles(vehicleTypeFilteredVehicles);
         } else {
@@ -237,7 +237,6 @@ public class UserInterface {
         }
     }
 
-    // processAddVehicleRequest()
     public void processAddVehicleRequest() {
         int vin; // Like an ID#
         int year;
@@ -256,6 +255,8 @@ public class UserInterface {
 
         System.out.println("What year was the release year of the vehicle?");
         year = scanner.nextInt();
+
+        // Consumes extra carriage
         scanner.nextLine();
 
         System.out.println("Who is the maker of this vehicle? (e.g. Honda)");
@@ -292,10 +293,9 @@ public class UserInterface {
         );
 
         // Write to the file and save dealership
-        fileManager.saveDealership(this.dealership);
+        DealershipFileManager.saveDealership(this.dealership);
     }
 
-    // processRemoveVehicleRequest()
     public void processRemoveVehicleRequest() {
         int vinInput; // Like an ID#
 
@@ -311,6 +311,7 @@ public class UserInterface {
         for (Vehicle vehicle : this.dealership.getAllVehicles()) {
             vehicleVin = vehicle.getVin(); // vin# of each vehicle in the dealership
             if (vehicleVin == vinInput) {
+                this.dealership.removeVehicle(vehicle);
                 System.out.printf("You removed: %d | %d | %s | %s | %s | %s | %d | %.2f\n\n\n",
                         vehicle.getVin(),
                         vehicle.getYear(),
@@ -321,13 +322,13 @@ public class UserInterface {
                         vehicle.getOdometer(),
                         vehicle.getPrice()
                 );
-                this.dealership.removeVehicle(vehicle);
-                break; // Breaks out of for loop as soon as vehicle is removed.
+                // Write to the file and save/update dealership
+                DealershipFileManager.saveDealership(this.dealership);
+                return; // Returns out of for loop as soon as vehicle is removed.
             }
         }
 
-        // Write to the file and save/update dealership
-        fileManager.saveDealership(this.dealership);
+        System.out.println("Vehicle not found.\n");
     }
 
 }
