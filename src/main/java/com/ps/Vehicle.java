@@ -84,5 +84,19 @@ public class Vehicle {
     }
 
 
-    // Advised NOT to override toString() for printing. Better practice to manually format it yourself.
+    // Advised NOT to rely too much on overriding toString() for printing. Better practice to manually format it yourself.
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "vin=" + vin +
+                ", year=" + year +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", vehicleType='" + vehicleType + '\'' +
+                ", color='" + color + '\'' +
+                ", odometer=" + odometer +
+                ", price=" + price +
+                '}';
+    }
 }
